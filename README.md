@@ -172,5 +172,121 @@ global:
 ```
 # Оптимизация О2
 ```
+	.attribute	4, 16
+	.attribute	5, "rv32i2p1"
+	.file	"hw2.c"
+	.text
+	.globl	add                             # -- Begin function add
+	.p2align	2
+	.type	add,@function
+add:                                    # @add
+# %bb.0:
+	beq	a0, a1, .LBB0_2
+# %bb.1:
+	neg	a1, a1
+.LBB0_2:
+	add	a0, a1, a0
+	ret
+.Lfunc_end0:
+	.size	add, .Lfunc_end0-add
+                                        # -- End function
+	.globl	funct                           # -- Begin function funct
+	.p2align	2
+	.type	funct,@function
+funct:                                  # @funct
+# %bb.0:
+	beq	a0, a1, .LBB1_2
+# %bb.1:
+	neg	a1, a1
+.LBB1_2:
+	add	a0, a1, a0
+	slli	a0, a0, 3
+	ret
+.Lfunc_end1:
+	.size	funct, .Lfunc_end1-funct
+                                        # -- End function
+	.globl	upper                           # -- Begin function upper
+	.p2align	2
+	.type	upper,@function
+upper:                                  # @upper
+# %bb.0:
+	lui	a1, %hi(global)
+	lui	a2, 74565
+	lui	a0, 74565
+	sw	a2, %lo(global)(a1)
+	ret
+.Lfunc_end2:
+	.size	upper, .Lfunc_end2-upper
+                                        # -- End function
+	.type	global,@object                  # @global
+	.bss
+	.globl	global
+	.p2align	2, 0x0
+global:
+	.word	0                               # 0x0
+	.size	global, 4
 
+	.ident	"clang version 22.1.2 (https://github.com/llvm/llvm-project 1ab49a973e210e97d61e5db6557180dcb92c3e98)"
+	.section	".note.GNU-stack","",@progbits
+	.addrsig
+```
+# Оптимизация О3
+```
+	.attribute	4, 16
+	.attribute	5, "rv32i2p1"
+	.file	"hw2.c"
+	.text
+	.globl	add                             # -- Begin function add
+	.p2align	2
+	.type	add,@function
+add:                                    # @add
+# %bb.0:
+	beq	a0, a1, .LBB0_2
+# %bb.1:
+	neg	a1, a1
+.LBB0_2:
+	add	a0, a1, a0
+	ret
+.Lfunc_end0:
+	.size	add, .Lfunc_end0-add
+                                        # -- End function
+	.globl	funct                           # -- Begin function funct
+	.p2align	2
+	.type	funct,@function
+funct:                                  # @funct
+# %bb.0:
+	beq	a0, a1, .LBB1_2
+# %bb.1:
+	neg	a1, a1
+.LBB1_2:
+	add	a0, a1, a0
+	slli	a0, a0, 3
+	ret
+.Lfunc_end1:
+	.size	funct, .Lfunc_end1-funct
+                                        # -- End function
+	.globl	upper                           # -- Begin function upper
+	.p2align	2
+	.type	upper,@function
+upper:                                  # @upper
+# %bb.0:
+	lui	a1, %hi(global)
+	lui	a2, 74565
+	lui	a0, 74565
+	sw	a2, %lo(global)(a1)
+	ret
+.Lfunc_end2:
+	.size	upper, .Lfunc_end2-upper
+                                        # -- End function
+	.type	global,@object                  # @global
+	.bss
+	.globl	global
+	.p2align	2, 0x0
+global:
+	.word	0                               # 0x0
+	.size	global, 4
+
+	.ident	"clang version 22.1.2 (https://github.com/llvm/llvm-project 1ab49a973e210e97d61e5db6557180dcb92c3e98)"
+	.section	".note.GNU-stack","",@progbits
+	.addrsig
 ```
